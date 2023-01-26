@@ -143,8 +143,6 @@ nohup.out
 /SAT/**/*.txt
 /0419_KGPretrain_zsl/step1_featuredeal/res101.mat
 /0419_KGPretrain_zsl/step1_featuredeal/awa2_feature.mat
-/0419_KGPretrain_zsl
-/qa_data*
 /dataset/*/*.pkl
 /dataset/*/*.pt
 /dataset/*/entity2text.txt
