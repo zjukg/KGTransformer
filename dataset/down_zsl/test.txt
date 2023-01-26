@@ -1,0 +1,4 @@
+AwA:n02391049	AwA:hasCharacter	AwA:a080
+AwA:n02480855	AwA:hasHabitat	AwA:a084
+AwA:n02132580	AwA:actRole	AwA:a062
+AwA:n02071294	AwA:hasCharacter	AwA:a081

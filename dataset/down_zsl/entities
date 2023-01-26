@@ -1,0 +1,146 @@
+0	AwA:n02391049	zebra
+1	AwA:a080	timid
+2	AwA:n02480855	gorilla, gorilla gorilla
+3	AwA:a084	nestspot
+4	AwA:n02132580	grizzly, grizzly bear, silvertip, silver tip, ursus horribilis, ursus arctos horribilis
+5	AwA:a062	stalker
+6	AwA:n02071294	killer whale, killer, orca, grampus, sea wolf, orcinus orca
+7	AwA:a081	smart
+8	AwA:n02403454	cow, moo cow
+9	AwA:a039	walks
+10	AwA:n02114100	wolf
+11	AwA:a083	solitary
+12	AwA:n02411705	sheep
+13	AwA:n02401031	bovid
+14	AwA:n02064816	blue whale, sulfur bottom, balaenoptera musculus
+15	AwA:a015	big
+16	AwA:n02441942	weasel
+17	AwA:a071	fields
+18	AwA:n02374451	horse, equus caballus
+19	AwA:n02085620	chihuahua
+20	AwA:a043	weak
+21	AwA:a040	fast
+22	AwA:n02129165	lion, king of beasts, panthera leo
+23	AwA:a018	lean
+24	AwA:n02503517	elephant
+25	AwA:a082	group
+26	AwA:a014	tough skin
+27	AwA:a026	tail
+28	AwA:n02481823	chimpanzee, chimp, pan troglodytes
+29	AwA:a068	bush
+30	AwA:n01889520	mole
+31	AwA:a027	chew teeth
+32	AwA:a001	black
+33	AwA:n02110341	dalmatian, coach dog, carriage dog
+34	AwA:n02510455	giant panda, panda, panda bear, coon bear, ailuropoda melanoleuca
+35	AwA:a042	strong
+36	AwA:n02403003	ox
+37	AwA:a041	slow
+38	AwA:n02106030	collie
+39	AwA:a012	furry
+40	AwA:n02129604	tiger, panthera tigris
+41	AwA:a059	hunter
+42	AwA:a009	patches
+43	AwA:n02068974	dolphin
+44	AwA:a063	new world
+45	AwA:a034	smelly
+46	AwA:n02065726	humpback, humpback whale, megaptera novaeangliae
+47	AwA:n02139199	bat, chiropteran
+48	AwA:a078	cave
+49	AwA:a072	jungle
+50	AwA:a049	nocturnal
+51	AwA:n02363005	beaver
+52	AwA:a075	ground
+53	AwA:n02430045	deer, cervid
+54	AwA:a055	vegetation
+55	AwA:a052	fish
+56	AwA:n02128385	leopard, panthera pardus
+57	AwA:a044	muscle
+58	AwA:n02342885	hamster
+59	AwA:a058	grazer
+60	AwA:n02445715	skunk, polecat, wood pussy
+61	AwA:a046	quadrupedal
+62	AwA:n02123394	persian cat
+63	AwA:a047	active
+64	AwA:a028	meat teeth
+65	AwA:n02508021	raccoon, racoon
+66	AwA:a051	agility
+67	AwA:a017	bulbous
+68	AwA:n02331046	rat
+69	AwA:n02330245	mouse
+70	AwA:a002	white
+71	AwA:n02432983	elk, european elk, moose, alces alces
+72	AwA:n02439033	giraffe, camelopard, giraffa camelopardalis
+73	AwA:a077	tree
+74	AwA:a061	skimmer
+75	AwA:a056	insects
+76	AwA:n02127482	bobcat, bay lynx, lynx rufus
+77	AwA:a029	buck teeth
+78	AwA:n02118333	fox
+79	AwA:n02402425	cattle, cows, kine, oxen, bos taurus
+80	AwA:n02398521	hippopotamus, hippo, river horse, hippopotamus amphibius
+81	AwA:n02493793	spider monkey, ateles geoffroyi
+82	AwA:n02081571	walrus, seahorse, sea horse
+83	AwA:n02441326	musteline mammal, mustelid, musteline
+84	AwA:n02106662	german shepherd, german shepherd dog, german police dog, alsatian
+85	AwA:a004	brown
+86	AwA:a021	hooves
+87	AwA:a085	domestic
+88	AwA:n02123597	siamese cat, siamese
+89	AwA:n02121808	domestic cat, house cat, felis domesticus, felis catus
+90	AwA:n02395406	hog, pig, grunter, squealer, sus scrofa
+91	AwA:a048	inactive
+92	AwA:a030	strain teeth
+93	AwA:a005	gray
+94	AwA:n02329401	rodent, gnawer
+95	AwA:a069	plains
+96	AwA:n02419796	antelope
+97	AwA:n02355227	squirrel
+98	AwA:a016	small
+99	AwA:n02391994	rhinoceros, rhino
+100	AwA:a079	fierce
+101	AwA:a025	longneck
+102	AwA:a022	pads
+103	AwA:a013	hairless
+104	AwA:a010	spots
+105	AwA:a024	long leg
+106	AwA:a070	forest
+107	AwA:n02134084	ice bear, polar bear, ursus maritimus, thalarctos maritimus
+108	AwA:n02127808	big cat, cat
+109	AwA:a064	old world
+110	AwA:a032	claws
+111	AwA:n02076196	seal
+112	AwA:n02324045	rabbit, coney, cony
+113	AwA:a023	paws
+114	AwA:a060	scavenger
+115	AwA:a073	mountains
+116	AwA:n02083346	canine, canid
+117	AwA:a011	stripes
+118	AwA:a076	water
+119	AwA:a008	yellow
+120	AwA:n02444819	otter
+121	AwA:a003	blue
+122	AwA:a053	meat
+123	AwA:a050	hibernate
+124	AwA:a074	ocean
+125	AwA:n02399000	ruminant
+126	AwA:a037	swims
+127	AwA:n02507649	procyonid
+128	AwA:a057	forager
+129	AwA:a066	coastal
+130	AwA:a065	arctic
+131	AwA:a031	horns
+132	AwA:a006	orange
+133	AwA:n02480153	great ape, pongid
+134	AwA:n02104523	shepherd dog, sheepdog, sheep dog
+135	AwA:n02410702	american bison, american buffalo, buffalo, bison bison
+136	AwA:a038	tunnels
+137	AwA:a019	flippers
+138	AwA:a054	plankton
+139	AwA:n02063224	baleen whale, whalebone whale
+140	AwA:n02374149	equine, equid
+141	AwA:a045	bipedal
+142	AwA:a036	hops
+143	AwA:n02075927	pinniped mammal, pinniped, pinnatiped
+144	AwA:a033	tusks
+145	AwA:a020	hands

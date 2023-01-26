@@ -1,0 +1,16 @@
+0	AwA:hasCharacter	has character
+1	AwA:hasHabitat	has habitat
+2	AwA:actRole	act role
+3	AwA:canMoveeBy	can movee by
+4	AwA:hasBehavior	has behavior
+5	rdfs:subClassOf	sub class of
+6	AwA:is	is
+7	AwA:looks	looks
+8	AwA:moves	moves
+9	AwA:hasBodyShape	has body shape
+10	AwA:hasTexture	has texture
+11	AwA:hasBodyPart	has body part
+12	AwA:hasTeeth	has teeth
+13	AwA:hasColor	has color
+14	AwA:hasDecoration	has decoration
+15	AwA:eat	eat
