@@ -61,7 +61,7 @@ def setup_parser():
     parser.add_argument('--train_part', default='together', type=str) # (roberta, kgtrans, together)
     parser.add_argument('--encoder_lr', default=1e-5, type=float) # roberta 
     parser.add_argument('--decoder_lr', default=1e-4, type=float) # transf
-    parser.add_argument('--cuda_devices1', default=[1], nargs='+', type=int) #qa的
+    parser.add_argument('--cuda_devices1', default=[1], nargs='+', type=int) # qa
     parser.add_argument('--big_bs', default=64, type=int)
     parser.add_argument('--token_types',default=4, type = int) # 0head 1rel 3tail 2token 
     # 4 for qa 
