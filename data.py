@@ -552,7 +552,9 @@ class KGTokenizer:
         self.head_related_triples = ddict(list) 
         self.tail_related_triples = ddict(list) 
         self.entity_related_triples = ddict(list) 
+        self.entity_related_triples_np = {}
         self.relation_related_triples = ddict(list)
+        self.relation_related_triples_np = {}
         self.head_relations_set = ddict(set) 
         self.tail_relations_set = ddict(set) 
         max_len = 0
@@ -569,14 +571,14 @@ class KGTokenizer:
             if max(len(self.head_relations_set[hid]), len(self.tail_relations_set[tid])) > max_len:
                 max_len =  max(len(self.head_relations_set[hid]), len(self.tail_relations_set[tid]))
         
-        for key in self.head_related_triples:
-            self.head_related_triples[key] = np.array(self.head_related_triples[key])
-        for key in self.tail_related_triples:
-            self.tail_related_triples[key] = np.array(self.tail_related_triples[key])
+        # for key in self.head_related_triples:
+        #     self.head_related_triples_np[key] = np.array(self.head_related_triples[key])
+        # for key in self.tail_related_triples:
+        #     self.tail_related_triples_np[key] = np.array(self.tail_related_triples[key])
         for key in self.entity_related_triples:
-            self.entity_related_triples[key] = np.array(self.entity_related_triples[key])
+            self.entity_related_triples_np[key] = np.array(self.entity_related_triples[key])
         for key in self.relation_related_triples:
-            self.relation_related_triples[key] = np.array(self.relation_related_triples[key])
+            self.relation_related_triples_np[key] = np.array(self.relation_related_triples[key])
 
  
     def get_2_hop_related_triples(self, specific_entity=None): 
@@ -615,7 +617,7 @@ class KGTokenizer:
                 
                 self.ent_2_hop_triples[ent] = realted_triple_neighbors
                 
-                print('ent',ent, len(realted_triple_neighbors), sum([len(i) for i in realted_triple_neighbors.values()]))
+                # print('ent',ent, len(realted_triple_neighbors), sum([len(i) for i in realted_triple_neighbors.values()]))
                 # for the_triple, neighbors in realted_triple_neighbors.items():
                 #     print(the_triple)
                 #     print(neighbors)
@@ -625,6 +627,7 @@ class KGTokenizer:
                 pkl.dump(self.ent_2_hop_triples, f, protocol=2)
 
             # import pdb; pdb.set_trace()
+            print('Save two_hop_triples in', two_hop_triple_path)
             
     def sample_subgraph_multihop(self, triple_set, hops, count, ans): 
         
@@ -858,7 +861,7 @@ class KGDataset(Dataset):
         return sentence, sentence_ft, mask_ft, task_id, label, extended_visible_matrix, token_types
   
     def sample_given_relation(self, rel, count):
-        related_triples = self.tokenizer.relation_related_triples[rel]
+        related_triples = self.tokenizer.relation_related_triples_np[rel]
         num = len(related_triples)
         shuffle_index = random.sample(range(0, num), min(num, count)) 
         sample_triples = related_triples[shuffle_index]
@@ -866,7 +869,7 @@ class KGDataset(Dataset):
 
     def sample_one_hop_given_entity(self, entity, count): 
         
-        one_hop_list = self.tokenizer.entity_related_triples[entity]
+        one_hop_list = self.tokenizer.entity_related_triples_np[entity]
         num = len(one_hop_list)
         shuffle_index = random.sample(range(0, num), min(num, count)) 
         subgraph_one_hop = one_hop_list[shuffle_index]

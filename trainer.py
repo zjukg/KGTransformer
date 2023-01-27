@@ -4,7 +4,7 @@ import imp
 import math
 from operator import index
 from qa_utils import RAdam
-from setuptools_scm import Configuration
+# from setuptools_scm import Configuration
 import torch
 import torch.nn as nn
 from torch.optim import Adam, Adagrad

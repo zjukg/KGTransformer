@@ -1,11 +1,13 @@
-Run the following commands to create a conda environment (assuming CUDA11.4):
+Run the following commands to create an environment (assuming CUDA10.1):
+(pytorch:1.8PAI-gpu-py36-cu101-ubuntu18.04)
 ```
-pytorch:1.8PAI-gpu-py36-cu101-ubuntu18.04
-(pip install torch==1.8.0+cu101 -f https://download.pytorch.org/whl/torch_stable.html)
+pip install torch==1.8.0+cu101 -f https://download.pytorch.org/whl/torch_stable.html
 pip install transformers==2.0.0
-pip install scipy
-pip install scikit-learn
-pip install packaging
+pip install tokenizers==0.11.1
+pip install scipy==1.5.3
+pip install scikit-learn==0.24.2
+pip install packaging==21.3
+pip install huggingface_hub==0.4.0
 ```
 
 # Pretrain
