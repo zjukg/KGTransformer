@@ -1,8 +1,7 @@
 Run the following commands to create a conda environment (assuming CUDA11.4):
 ```
-python=3.6.15
-GCC 9.4.0
-1.10.2+cu113
+pytorch:1.8PAI-gpu-py36-cu101-ubuntu18.04
+(pip install torch==1.8.0+cu101 -f https://download.pytorch.org/whl/torch_stable.html)
 pip install transformers==2.0.0
 pip install scipy
 pip install scikit-learn
