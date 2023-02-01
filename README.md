@@ -5,12 +5,12 @@ Code and datasets for paper "Structure Pre-training and Prompt Tuning for Knowle
 
 ### Subgraph Pre-training
 <div align=center>
-<img src="pre-train.pdf" width="75%" height="75%" />
+<img src="pre-train.jpg" width="75%" height="75%" />
 </div>
 
 ### Task prompt tuning
 <div align=center>
-<img src="fine-tune.pdf" width="75%" height="75%" />
+<img src="fine-tune.jpg" width="75%" height="75%" />
 </div>
 
 ## Requirements
