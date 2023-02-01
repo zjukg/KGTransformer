@@ -1,3 +1,9 @@
+# KGTransformer
+Code and datasets for paper "Structure Pre-training and Prompt Tuning for Knowledge Graph Transfer".
+
+## Model Architecture
+
+## Requirements
 Run the following commands to create an environment (assuming CUDA10.1):
 
 (pytorch:1.8PAI-gpu-py36-cu101-ubuntu18.04)
@@ -11,21 +17,21 @@ pip install packaging==21.3
 pip install huggingface_hub==0.4.0
 ```
 
-# Pretrain
+## How to Run
+### Pretrain
 ```
 python run_pretrain.py --pretrain_dataset BIG --dataset_name BIG --num_hidden_layers 4 --train_bs 16 --lr 1e-4 --epochs 10 
 ```
 
-# Downstream Task
-## Triple CLS
+### Downstream Task: Triple Classification
 ```
 python run_down_triplecls.py --dataset_name WN18RR --pretrain_dataset BIG --down_task down_triplecls --train_bs 16 --test_bs 128 --epochs 50 --fixedT 1
 ```
-## ZSL
+### Downstream Task: Zero-shot Image Classification
 ```
 python run_down_zsl.py --dataset_name down_zsl --pretrain_dataset down_zsl --down_task down_zsl --train_bs 32 --test_bs 8 --epochs 10 --fixedT 1 --lr 1e-4 --test_epoch 1 --multi_pic 15
 ```
-## QA 
+## Downstream Task: Question Answering 
 ```
 pip install transformers==2.0.0
 ```
