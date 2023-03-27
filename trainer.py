@@ -730,7 +730,7 @@ class KGBertTrainer_down_triplecls(KGBertTrainer):
         self.test_type = test_type
         #if self.args.continue_pretrain: 
         if True:
-            self.optim_schedule = ReduceLROnPlateau(self.optim, mode='min', factor=0.8, patience=400, verbose=True, threshold=1e-4, threshold_mode='rel', cooldown=0, min_lr=1e-6, eps=1e-08)
+            self.optim_schedule = ReduceLROnPlateau(self.optim, mode='min', factor=0.9, patience=1000, verbose=True, threshold=1e-4, threshold_mode='rel', cooldown=0, min_lr=1e-6, eps=1e-08)
 
     def train(self, epoch):
         self.model.train()
@@ -743,14 +743,14 @@ class KGBertTrainer_down_triplecls(KGBertTrainer):
 
     def iteration_train(self, epoch, data_loader = None):
         str_code = "train" 
-
+        equ_loss = 0
         # Setting the tqdm progress bar
         data_iter = tqdm.tqdm(enumerate(data_loader),
                               desc="EP_%s:%d" % (str_code, epoch),
                               total=len(data_loader),
                               bar_format="{l_bar}{r_bar}")
 
-
+        
         for i, data in data_iter:
             batch_sentences, batch_sent_ft, batch_mask_ft, mask, token_type_ids, labels, final_visible_matrix, task_indexs = data
 
@@ -776,7 +776,7 @@ class KGBertTrainer_down_triplecls(KGBertTrainer):
                     }
 
             loss, acc = self.model(input, labels, task_indexs) 
-
+            equ_loss = (equ_loss*i + loss.item())/(i+1)
             
             # 2. backward and optimization
             #if not self.args.continue_pretrain: 
@@ -789,18 +789,20 @@ class KGBertTrainer_down_triplecls(KGBertTrainer):
                 self.optim.zero_grad()
                 loss.backward()
                 self.optim.step()
-                self.optim_schedule.step(loss.item()) 
-
+                self.optim_schedule.step(equ_loss) 
+            
             post_fix = {
                     "ep": epoch,
                     "iter": i,
                     "loss": round(loss.item(), 3),
-                    'acc':round(acc.item(),3),
+                    "equ_loss": round(equ_loss, 3),
+                    'acc':round(acc.item(), 3),
                 }
             if i % self.log_freq == 0:
                 data_iter.write(str(post_fix))
-
-        self.logger.info(f"EP{epoch}_{str_code}, loss={round(loss.item(),3)}, acc={round(acc.item(),3)}")
+            
+            
+        self.logger.info(f"EP{epoch}_{str_code}, loss={round(loss.item(),3)}, equ_loss={round(equ_loss, 3)}, acc={round(acc.item(),3)}")
         
 
     def iteration_test(self, epoch, data_loader = None, file_path=None):

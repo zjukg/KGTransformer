@@ -183,23 +183,26 @@ KGModel = KGBert_down_qa(tokenizer, args)
 if args.direct_ft:
     logger.info(f"Directly ft, no pretrained parameters.")
 else:
-    parameter_path = args.petrain_save_path + '.ep4_QA'
-    concept_dict = torch.load(parameter_path)
-    
-    for key in list(concept_dict.keys()):
-        if 'trans_encoder.encoder.encoder' not in key and 'trans_encoder.encoder.embeddings.word_mlp' not in key:
-            del concept_dict[key] 
-    
-    for name, p in KGModel.named_parameters():
-        if name.startswith('trans_encoder.encoder.embeddings.word_mlp.weight'):
-            concept_dict['trans_encoder.encoder.embeddings.word_mlp.weight'] += p.data 
+    try:
+        parameter_path = args.petrain_save_path + '.ep4_QA'
+        concept_dict = torch.load(parameter_path)
 
-    KGModel.load_state_dict(concept_dict, strict=False) 
-    for name, p in KGModel.named_parameters():
-        if name.startswith('trans_encoder.encoder.encoder.layer'):
-            assert (p.data - concept_dict[name]).sum() == 0
+        for key in list(concept_dict.keys()):
+            if 'trans_encoder.encoder.encoder' not in key and 'trans_encoder.encoder.embeddings.word_mlp' not in key:
+                del concept_dict[key] 
 
-    logger.info(f"load pretrained kgtransformer parameters from {parameter_path}.")
+        for name, p in KGModel.named_parameters():
+            if name.startswith('trans_encoder.encoder.embeddings.word_mlp.weight'):
+                concept_dict['trans_encoder.encoder.embeddings.word_mlp.weight'] += p.data 
+
+        KGModel.load_state_dict(concept_dict, strict=False) 
+        for name, p in KGModel.named_parameters():
+            if name.startswith('trans_encoder.encoder.encoder.layer'):
+                assert (p.data - concept_dict[name]).sum() == 0
+
+        logger.info(f"load pretrained parameters from {parameter_path}.")
+    except:
+        logger.info(f"cannot load pretrained parameters.")
 
 # ------------------------------------
 # qa ent emb

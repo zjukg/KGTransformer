@@ -101,6 +101,7 @@ def collate_fn(batch):
 # ------------------------------------
 
 args = setup_parser()
+args.if_pretrain = True
 tokenizer = KGTokenizer(args)
 config = Config(tokenizer)
 

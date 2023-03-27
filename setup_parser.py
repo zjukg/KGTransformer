@@ -13,7 +13,7 @@ def setup_parser():
     parser.add_argument('--dataset_name', default="", type=str)
     parser.add_argument('--pretrain_dataset', default="", type=str)
     parser.add_argument('--down_task', default="", type=str)
-    
+    parser.add_argument('--if_pretrain', default=False, type=bool)
     parser.add_argument('--cuda_devices', default=[0], nargs='+', type=int)
     
 

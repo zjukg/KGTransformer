@@ -4,6 +4,7 @@ pretrain_model = 'pretrain_models/BIG/model_layer-4_hidden-768_heads-12_seq-126_
 
 target_file = pretrain_model + '_delWE'
 
+# import pdb; pdb.set_trace()
 pretrain_weight = torch.load(pretrain_model) 
 
 for key in list(pretrain_weight.keys()):

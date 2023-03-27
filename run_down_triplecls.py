@@ -108,10 +108,9 @@ test_dataset = KGDataset_down_triplecls(args.seq_len_down, tokenizer, tokenizer.
 
 
 train_loader = DataLoader(
-    train_dataset,
-    batch_size=args.train_bs,
-    shuffle=True,
-    drop_last=False,
+    train_dataset, 
+    batch_size=args.train_bs, 
+    shuffle=True, 
     collate_fn=collate_fn,
     #num_workers=num_workers,
 )
@@ -140,20 +139,21 @@ test_loader = DataLoader(
 
 KGModel = KGBert_down_tirplecls(tokenizer, args)
 
-
 assert KGModel.encoder.embeddings.word_embeddings.weight.requires_grad == True 
 logger.info(f"KGModel.encoder.embeddings.word_embeddings.weight.requires_grad == {KGModel.encoder.embeddings.word_embeddings.weight.requires_grad}")
 
 if args.direct_ft:
     logger.info(f"Directly ft, no pretrained parameters.")
 else:
-    parameter_paths = [int(i.split('.ep')[-1].split('_delWE')[0]) for i in list(glob.iglob(args.petrain_save_path + '.ep*_delWE'))]
-    parameter_paths.sort()
-    parameter_path = args.petrain_save_path + '.ep' + str(parameter_paths[-1]) + '_delWE'
-    concept_dict = torch.load(parameter_path)
-    KGModel.load_state_dict(concept_dict, strict=False) 
-    logger.info(f"load pretrained parameters from {parameter_path}.")
-
+    try:
+        parameter_paths = [int(i.split('.ep')[-1].split('_delWE')[0]) for i in list(glob.iglob(args.petrain_save_path + '.ep*_delWE'))]
+        parameter_paths.sort()
+        parameter_path = args.petrain_save_path + '.ep' + str(parameter_paths[-1]) + '_delWE'
+        concept_dict = torch.load(parameter_path)
+        KGModel.load_state_dict(concept_dict, strict=False) 
+        logger.info(f"load pretrained parameters from {parameter_path}.")
+    except:
+        logger.info(f"cannot load pretrained parameters.")
 
 if args.fixedT:
     for name, p in KGModel.named_parameters():
@@ -165,6 +165,7 @@ if args.fixedT:
         if 'encoder.encoder.layer.' in name:
             assert p.requires_grad == False, 'error'
 
+# import pdb; pdb.set_trace()
 # ------------------------------------
 # train model
 # ------------------------------------
@@ -214,6 +215,7 @@ for epoch in range(args.epochs):
     if epoch - last_best_epoch > 10: 
         break
 
+    # now_metric = test_current(epoch, metric_type)  
     trainer.train(epoch) 
     now_metric = test_current(epoch, metric_type)  
 

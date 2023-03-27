@@ -208,13 +208,13 @@ logger.info(f"KGModel.encoder.embeddings.word_embeddings.weight.requires_grad ==
 if args.direct_ft:
     logger.info(f"Directly ft, no pretrained parameters.")
 else:
-    parameter_path = args.petrain_save_path + '.ep4_ZSL'
-    concept_dict = torch.load(parameter_path)
     try:
+        parameter_path = args.petrain_save_path + '.ep4_ZSL'
+        concept_dict = torch.load(parameter_path)
         KGModel.load_state_dict(concept_dict, strict=False) 
         logger.info(f"load pretrained parameters from {parameter_path}.")
     except:
-        logger.info(f"fail to load pretrained parameters.")
+        logger.info(f"cannot load pretrained parameters.")
 
 if args.fixedT:
     freeze_parameter('encoder.encoder.', KGModel, logger)

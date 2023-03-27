@@ -558,8 +558,12 @@ class KGTokenizer:
         self.head_relations_set = ddict(set) 
         self.tail_relations_set = ddict(set) 
         max_len = 0
-        # import pdb; pdb.set_trace()
-        for triple in self.train_triples + self.valid_triples + self.test_triples: 
+        
+        if self.args.if_pretrain:
+            visible_triples = self.train_triples + self.valid_triples + self.test_triples
+        else:
+            visible_triples = self.train_triples
+        for triple in visible_triples: 
             hid,rid,tid = triple
             self.head_related_triples[hid].append(triple)
             self.entity_related_triples[hid].append(triple)
@@ -1050,19 +1054,34 @@ class KGDataset_down_triplecls(KGDataset):
             if hid in self.tokenizer.entity_subgraph_fixed:
                 h_subgraph = self.tokenizer.entity_subgraph_fixed[hid]
                 h_subgraph = h_subgraph.tolist()
-            else: 
-                h_subgraph = list(self.sample_two_hop_given_entity_onefirst_fixed(hid, int(self.seq_len/2)))[0:int(self.seq_len/2)]
+            else:
+                h_subgraph = self.sample_two_hop_given_entity_onefirst_fixed(hid, int(self.seq_len/2))
+                if h_subgraph:
+                    h_subgraph = list(h_subgraph)[0:int(self.seq_len/2)]
+                else:
+                    h_subgraph = [(hid, rid, tid)]
                 self.tokenizer.entity_subgraph_fixed[hid] = np.array(h_subgraph)
             if tid in self.tokenizer.entity_subgraph_fixed:
                 t_subgraph = self.tokenizer.entity_subgraph_fixed[tid]
                 t_subgraph = t_subgraph.tolist()
             else: 
-                t_subgraph = list(self.sample_two_hop_given_entity_onefirst_fixed(tid, int(self.seq_len/2)))[0:int(self.seq_len/2)]
+                t_subgraph = self.sample_two_hop_given_entity_onefirst_fixed(tid, int(self.seq_len/2))
+                if t_subgraph:
+                    t_subgraph = list(t_subgraph)[0:int(self.seq_len/2)]
+                else:
+                    t_subgraph = [(hid, rid, tid)]
                 self.tokenizer.entity_subgraph_fixed[tid] = np.array(t_subgraph)
         else:
-            
-            h_subgraph = list(self.sample_two_hop_given_entity(hid, int(self.seq_len/2)))[0:int(self.seq_len/2)]
-            t_subgraph = list(self.sample_two_hop_given_entity(tid, int(self.seq_len/2)))[0:int(self.seq_len/2)]
+            h_subgraph = self.sample_two_hop_given_entity(hid, int(self.seq_len/2))
+            if h_subgraph:
+                h_subgraph =  list(h_subgraph)[0:int(self.seq_len/2)]
+            else:
+                h_subgraph = [(hid, rid, tid)]
+            t_subgraph = self.sample_two_hop_given_entity(tid, int(self.seq_len/2))
+            if t_subgraph:
+                t_subgraph = list(t_subgraph)[0:int(self.seq_len/2)]
+            else:
+                t_subgraph = [(hid, rid, tid)]
             
         
         sentence = [self.tokenizer.token2id['[PAD]']] 
@@ -1132,7 +1151,11 @@ class KGDataset_down_triplecls(KGDataset):
             token_types_list = []
 
             hid, rid, tid = sample 
-            sentence, sentence_ft, mask_ft, task_index, extended_visible_matrix, token_type = self.generate_sentences_triplecls(hid, rid, tid)
+            
+            if random.random() < 0.5: 
+                sentence, sentence_ft, mask_ft, task_index, extended_visible_matrix, token_type = self.generate_sentences_triplecls(hid, rid, tid, False)
+            else:
+                sentence, sentence_ft, mask_ft, task_index, extended_visible_matrix, token_type = self.generate_sentences_triplecls(hid, rid, tid)
             
             sentence_list.append(sentence)
             sentence_ft_list.append(sentence_ft)
@@ -1147,7 +1170,10 @@ class KGDataset_down_triplecls(KGDataset):
             neg_hids = random.sample(self.tokenizer.candi_entity_ids, self.args.neg_count)
             for neg_tid in neg_tids:    
                 if ((hid, rid, neg_tid) not in self.tokenizer.all_true_triples):
-                    sentence_neg, sentence_ft_neg, mask_ft_neg, task_index_neg, extended_visible_matrix_neg, token_type_neg = self.generate_sentences_triplecls(hid, rid, neg_tid)
+                    if random.random() < 0.5: 
+                        sentence_neg, sentence_ft_neg, mask_ft_neg, task_index_neg, extended_visible_matrix_neg, token_type_neg = self.generate_sentences_triplecls(hid, rid, neg_tid, False)
+                    else:
+                        sentence_neg, sentence_ft_neg, mask_ft_neg, task_index_neg, extended_visible_matrix_neg, token_type_neg = self.generate_sentences_triplecls(hid, rid, neg_tid)
                     sentence_list.append(sentence_neg)
                     sentence_ft_list.append(sentence_ft_neg)
                     mask_ft_list.append(mask_ft_neg)
@@ -1158,7 +1184,10 @@ class KGDataset_down_triplecls(KGDataset):
 
             for neg_hid in neg_hids:
                 if ((neg_hid, rid, tid) not in self.tokenizer.all_true_triples):
-                    sentence_neg, sentence_ft_neg, mask_ft_neg, task_index_neg, extended_visible_matrix_neg, token_type_neg = self.generate_sentences_triplecls(neg_hid, rid, tid)
+                    if random.random() < 0.5: 
+                        sentence_neg, sentence_ft_neg, mask_ft_neg, task_index_neg, extended_visible_matrix_neg, token_type_neg = self.generate_sentences_triplecls(neg_hid, rid, tid, False)
+                    else:
+                        sentence_neg, sentence_ft_neg, mask_ft_neg, task_index_neg, extended_visible_matrix_neg, token_type_neg = self.generate_sentences_triplecls(neg_hid, rid, tid)
                     sentence_list.append(sentence_neg)
                     sentence_ft_list.append(sentence_ft_neg)
                     mask_ft_list.append(mask_ft_neg)
