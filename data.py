@@ -1261,19 +1261,14 @@ class KGDataset_down_qa(KGDataset):
                 extended_visible_matrix0 = torch.tensor([[1]])
 
             
-            sentence += [self.tokenizer.token2id['[PAD]'], self.tokenizer.token2id['[PAD]'],
-                         #self.tokenizer.token2id['[PAD]'], self.tokenizer.token2id['[PAD]'],
-                         self.tokenizer.token2id['[PAD]']]
-            sentence_ft += [self.tokenizer.token2id['[TASK]'], 
-                            # self.tokenizer.token2id['[ENT1]'], self.tokenizer.token2id['[ENT1]'], 
-                            self.tokenizer.token2id['[PAD]'],
-                         self.tokenizer.token2id['[SEP]']]
-            sentence_ent += [self.tokenizer.token2id['[PAD]'], self.tokenizer.token2id['[PAD]'], self.tokenizer.token2id['[PAD]']]
-            prompt_len = 3
+            sentence += [self.tokenizer.token2id['[PAD]'], self.tokenizer.token2id['[PAD]'], self.tokenizer.token2id['[PAD]'], self.tokenizer.token2id['[PAD]'], self.tokenizer.token2id['[PAD]']]
+            sentence_ft += [self.tokenizer.token2id['[TASK]'], self.tokenizer.token2id['[PAD]'], self.tokenizer.token2id['[MASK]'], self.tokenizer.token2id['[PAD]'], self.tokenizer.token2id['[SEP]']]
+            sentence_ent += [self.tokenizer.token2id['[PAD]'], self.tokenizer.token2id['[PAD]'], self.tokenizer.token2id['[PAD]'], self.tokenizer.token2id['[PAD]'], self.tokenizer.token2id['[PAD]']]
+            prompt_len = 5
             mask_index = len(sentence) - prompt_len  # position for [TASK]
             f_index = len(sentence) - 2
             mask_ft += [0]*prompt_len 
-            token_types += [2, 4, 2] # 4 qa token [0, 1, 3, 2] head rel tail token qa
+            token_types += [2, 2, 2, 4, 2] # 4 qa token [0, 1, 3, 2] head rel tail token qa
                 
             # import pdb; pdb.set_trace()
             size0 = extended_visible_matrix0.shape[0]
@@ -1375,7 +1370,7 @@ class KGDataset_down_zsl_multi_pic(KGDataset):
 
             
             sentence += [self.tokenizer.token2id['[PAD]'], self.tokenizer.token2id['[PAD]'], self.tokenizer.token2id['[PAD]'], self.tokenizer.token2id['[PAD]']] * len_of_piclist
-            sentence_ft += [self.tokenizer.token2id['[TASK]'], self.tokenizer.token2id['[PAD]'], self.tokenizer.token2id['[PAD]'], self.tokenizer.token2id['[PAD]']] * len_of_piclist
+            sentence_ft += [self.tokenizer.token2id['[TASK]'], self.tokenizer.token2id['[MASK]'], self.tokenizer.token2id['[MASK]'], self.tokenizer.token2id['[PAD]']] * len_of_piclist
             mask_ft += [1, 1, 1, 0] * len_of_piclist
             token_types += [2, 2, 2, 2] * len_of_piclist
         
