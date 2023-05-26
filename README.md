@@ -1,5 +1,5 @@
 # KGTransformer
-Code and datasets for paper "Structure Pre-training and Prompt Tuning for Knowledge Graph Transfer" accepted by WWW'23. 
+Code and datasets for paper "[Structure Pre-training and Prompt Tuning for Knowledge Graph Transfer](https://arxiv.org/pdf/2303.03922.pdf)" accepted by WWW'23. 
 
 ## Model Architecture
 
